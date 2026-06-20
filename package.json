@@ -1,0 +1,30 @@
+{
+  "name": "com.alexandaar.floatingtext",
+  "version": "1.0.0",
+  "displayName": "Floating Text",
+  "description": "A floating text system for damage numbers, popups, and other UI text animations that float up and disappear.",
+  "unity": "6000.0",
+  "documentationUrl": "https://github.com/Hunter13ua/FloatingText",
+  "changelogUrl": "https://github.com/Hunter13ua/FloatingText/blob/main/CHANGELOG.md",
+  "licensesUrl": "https://github.com/Hunter13ua/FloatingText/blob/main/LICENSE.md",
+  "keywords": [
+    "floating",
+    "text",
+    "damage",
+    "numbers",
+    "popup",
+    "ui",
+    "feedback"
+  ],
+  "author": {
+    "name": "Alexandaar",
+    "url": "https://github.com/Hunter13ua"
+  },
+  "samples": [
+    {
+      "displayName": "Floating Text Demo",
+      "description": "A simple scene demonstrating how to use the floating text system.",
+      "path": "Samples~/FloatingTextDemo"
+    }
+  ]
+}
