@@ -2,7 +2,7 @@
   "name": "com.alexandaar.floatingtext",
   "version": "1.0.0",
   "displayName": "Floating Text",
-  "description": "A floating text system for damage numbers, popups, and other UI text animations that float up and disappear.",
+  "description": "A high-performance floating text system for damage numbers, popups, and other UI text animations using Unity DOTS and TextMeshPro.",
   "unity": "6000.0",
   "documentationUrl": "https://github.com/Hunter13ua/FloatingText",
   "changelogUrl": "https://github.com/Hunter13ua/FloatingText/blob/main/CHANGELOG.md",
@@ -14,8 +14,16 @@
     "numbers",
     "popup",
     "ui",
-    "feedback"
+    "feedback",
+    "dots",
+    "ecs",
+    "textmeshpro"
   ],
+  "dependencies": {
+    "com.unity.entities": "1.3.0",
+    "com.unity.entities.graphics": "1.3.0",
+    "com.unity.textmeshpro": "3.0.0"
+  },
   "author": {
     "name": "Alexandaar",
     "url": "https://github.com/Hunter13ua"
