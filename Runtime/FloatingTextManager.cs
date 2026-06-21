@@ -8,26 +8,23 @@ namespace FloatingText
     {
         static private readonly ProfilerMarker SpawnMarker = new("FloatingTextManager.Spawn");
         
-        private GameObject _floatingTextPrefab;
-
+        private FloatingTextFactory _factory;
         private List<FloatingTextView> _activeTexts = new ();
 
         public void Initialize()
         {
-            _floatingTextPrefab = Resources.Load<FloatingTextView>("FloatingText Prefab (TMP)").gameObject;
+            _factory = new FloatingTextFactory();
         }
 
         public void Spawn(Vector3 position, string text)
         {
             SpawnMarker.Begin();
 
-            var newTextGO = Instantiate(_floatingTextPrefab, position, Quaternion.identity);
-            var textView = newTextGO.GetComponent<FloatingTextView>();
+            var textView = _factory.Create();
             textView.SetupComponent(text);
 
+            // track
             _activeTexts.Add(textView);
-
-            // TODO: implement pooling, animation, and cleanup
 
             SpawnMarker.End();
         }
