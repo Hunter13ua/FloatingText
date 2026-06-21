@@ -8,45 +8,43 @@ namespace FloatingText
     {
         private GameObject _floatingTextPrefab;
 
-        private Dictionary<int, ObjectPool<FloatingTextView>> _objectPools = new();
+        private Dictionary<FloatingTextStyleSO, ObjectPool<FloatingTextView>> _objectPools = new();
 
         public FloatingTextFactory()
         {
             _floatingTextPrefab = Resources.Load<FloatingTextView>("FloatingText Prefab (TMP)").gameObject;
         }
 
-        public FloatingTextView Create(int style = 0)
+        public FloatingTextView Create(FloatingTextStyleSO style)
         {
             var pool = GetPoolByStyle(style);
             return pool.Get();
         }
 
-        public void Release(FloatingTextView view, int style)
+        public void Release(FloatingTextView view, FloatingTextStyleSO style)
         {
             var pool = GetPoolByStyle(style);
             pool.Release(view);
         }
 
-        private ObjectPool<FloatingTextView> GetPoolByStyle(int style)
+        private ObjectPool<FloatingTextView> GetPoolByStyle(FloatingTextStyleSO style)
         {
             if (!_objectPools.ContainsKey(style))
             {
-                _objectPools[style] = InstantiateNewPool();
+                _objectPools[style] = InstantiateNewPoolByStyle(style);
                 
             }
 
             return _objectPools[style];
         }
 
-        private ObjectPool<FloatingTextView> InstantiateNewPool()
+        private ObjectPool<FloatingTextView> InstantiateNewPoolByStyle(FloatingTextStyleSO style)
         {
             return new ObjectPool<FloatingTextView>
             (
                 createFunc: () =>
                 {
-                    var view = Object.Instantiate(_floatingTextPrefab);
-                    view.hideFlags = HideFlags.HideInHierarchy;
-                    return view.GetComponent<FloatingTextView>();
+                    return InstantiateViewWithStyle(style);
                 },
                 actionOnGet: view =>
                 {
@@ -63,6 +61,17 @@ namespace FloatingText
                 collectionCheck: false,
                 maxSize: 2048
             );
+        }
+
+        private FloatingTextView InstantiateViewWithStyle(FloatingTextStyleSO style)
+        {
+            var viewGO = Object.Instantiate(_floatingTextPrefab);
+            viewGO.hideFlags = HideFlags.HideInHierarchy;
+
+            var view = viewGO.GetComponent<FloatingTextView>();
+            view.ApplyStyle(style);
+            
+            return view;
         }
     }
 }

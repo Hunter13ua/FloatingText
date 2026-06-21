@@ -24,9 +24,9 @@ namespace FloatingText
         /// </summary>
         /// <param name="text">The text to display.</param>
         /// <param name="worldPosition">Position in world space where the text appears.</param>
-        public void Spawn(string text, Vector3 worldPosition)
+        public void Spawn(string text, Vector3 worldPosition, FloatingTextStyleSO style)
         {
-            _floatingTextManager.Spawn(worldPosition, text);
+            _floatingTextManager.Spawn(text, worldPosition, style);
         }
     }
 }

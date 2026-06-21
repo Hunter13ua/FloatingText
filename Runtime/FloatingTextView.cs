@@ -20,17 +20,18 @@ namespace FloatingText
             }
 
             transform.position = position;
-            SetupComponent(text);
+            _textComponent.text = text;
         }
-
-        public void SetupComponent(string text)
+        
+        public void ApplyStyle(FloatingTextStyleSO style)
         {
             if (_textComponent == null)
             {
                 Initialize();
             }
-
-            _textComponent.text = text;
+            
+            transform.localScale = style.Scale;
+            _textComponent.color = style.Color;
         }
     }
 }

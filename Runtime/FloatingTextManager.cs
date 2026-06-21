@@ -16,20 +16,20 @@ namespace FloatingText
             _factory = new FloatingTextFactory();
         }
 
-        public void Spawn(Vector3 position, string text)
+        public void Spawn(string text, Vector3 position, FloatingTextStyleSO style)
         {
             SpawnMarker.Begin();
 
-            var textView = _factory.Create();
+            var textView = _factory.Create(style);
             textView.SetupComponent(position, text);
 
             var activeText = new ActiveText()
             {
                 View = textView,
                 Lifetime = 0f,
-                MaxLifetime = 1f,
+                MaxLifetime = style.Lifetime,
                 Position = position,
-                Style = 0
+                Style = style
             };
 
             // track
@@ -44,7 +44,7 @@ namespace FloatingText
             {
                 var text = _activeTexts[i];
 
-                text.Position += Vector3.up * Time.deltaTime;
+                text.Position += Vector3.up * Time.deltaTime * text.Style.Speed;
                 text.Lifetime += Time.deltaTime;
 
                 text.View.transform.position = text.Position;

@@ -11,6 +11,6 @@ namespace FloatingText
 
         public Vector3 Position;
 
-        public int Style;
+        public FloatingTextStyleSO Style;
     }
 }
