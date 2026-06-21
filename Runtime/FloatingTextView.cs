@@ -29,8 +29,8 @@ namespace FloatingText
             {
                 Initialize();
             }
-            
-            transform.localScale = style.Scale;
+
+            transform.localScale = Vector3.one * style.Scale;
             _textComponent.color = style.Color;
         }
     }

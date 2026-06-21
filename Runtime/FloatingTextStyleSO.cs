@@ -11,7 +11,7 @@ namespace FloatingText
         
         public float Speed = 1f;
         
-        public Vector3 Scale = Vector3.one;
+        public float Scale = 1f;
 
         public FloatingTextAnimationType AnimationType = FloatingTextAnimationType.Normal;
     }
