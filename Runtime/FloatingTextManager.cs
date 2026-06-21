@@ -16,12 +16,12 @@ namespace FloatingText
             _factory = new FloatingTextFactory();
         }
 
-        public void Spawn(string text, Vector3 position, FloatingTextStyleSO style)
+        public void Spawn(string text, FloatingTextStyleSO style, Vector3 position, Quaternion rotation)
         {
             SpawnMarker.Begin();
 
             var textView = _factory.Create(style);
-            textView.SetupComponent(position, text);
+            textView.SetupComponent(position, rotation, text);
 
             var activeText = new ActiveText()
             {

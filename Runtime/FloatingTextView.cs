@@ -12,7 +12,7 @@ namespace FloatingText
             _textComponent = GetComponent<TMPro.TMP_Text>();
         }
 
-        public void SetupComponent(Vector3 position, string text)
+        public void SetupComponent(Vector3 position, Quaternion rotation, string text)
         {
             if (_textComponent == null)
             {
@@ -20,6 +20,7 @@ namespace FloatingText
             }
 
             transform.position = position;
+            transform.rotation = rotation;
             _textComponent.text = text;
         }
         

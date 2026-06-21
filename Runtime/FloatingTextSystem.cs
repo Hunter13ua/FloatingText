@@ -24,9 +24,19 @@ namespace FloatingText
         /// </summary>
         /// <param name="text">The text to display.</param>
         /// <param name="worldPosition">Position in world space where the text appears.</param>
-        public void Spawn(string text, Vector3 worldPosition, FloatingTextStyleSO style)
+        public void Spawn(string text, FloatingTextStyleSO style, Vector3 worldPosition)
         {
-            _floatingTextManager.Spawn(text, worldPosition, style);
+            var rotation = Quaternion.identity;
+            if (Camera.main != null)
+            {
+                rotation = Quaternion.LookRotation(worldPosition - Camera.main.transform.position);
+            }
+            _floatingTextManager.Spawn(text, style, worldPosition, rotation);
+        }
+
+        public void Spawn(string text, FloatingTextStyleSO style, Vector3 worldPosition, Quaternion worldRotation)
+        {
+            _floatingTextManager.Spawn(text, style, worldPosition, worldRotation);
         }
     }
 }
