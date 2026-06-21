@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6400211117011666336}
   - component: {fileID: 3178179414663085974}
   m_Layer: 0
-  m_Name: 'FloatingText Prefab (TMP) '
+  m_Name: FloatingText Prefab (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

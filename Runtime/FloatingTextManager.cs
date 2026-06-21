@@ -5,9 +5,14 @@ namespace FloatingText
 {
     internal class FloatingTextManager : MonoBehaviour
     {
-        [SerializeField] private GameObject _floatingTextPrefab;
+        private GameObject _floatingTextPrefab;
 
         private List<FloatingTextView> _activeTexts = new ();
+
+        public void Initialize()
+        {
+            _floatingTextPrefab = Resources.Load<FloatingTextView>("FloatingText Prefab (TMP)").gameObject;
+        }
 
         public void Spawn(Vector3 position, string text)
         {
@@ -18,7 +23,6 @@ namespace FloatingText
             _activeTexts.Add(textView);
 
             // TODO: implement pooling, animation, and cleanup
-            Debug.Log($"[FloatingText] Spawned \"{text}\" at {position}");
         }
 
         private void Update()
