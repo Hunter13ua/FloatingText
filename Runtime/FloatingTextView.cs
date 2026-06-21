@@ -12,6 +12,17 @@ namespace FloatingText
             _textComponent = GetComponent<TMPro.TMP_Text>();
         }
 
+        public void SetupComponent(Vector3 position, string text)
+        {
+            if (_textComponent == null)
+            {
+                Initialize();
+            }
+
+            transform.position = position;
+            SetupComponent(text);
+        }
+
         public void SetupComponent(string text)
         {
             if (_textComponent == null)

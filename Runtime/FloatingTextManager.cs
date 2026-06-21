@@ -21,7 +21,7 @@ namespace FloatingText
             SpawnMarker.Begin();
 
             var textView = _factory.Create();
-            textView.SetupComponent(text);
+            textView.SetupComponent(position, text);
 
             // track
             _activeTexts.Add(textView);
