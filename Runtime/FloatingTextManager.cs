@@ -9,7 +9,7 @@ namespace FloatingText
         static private readonly ProfilerMarker SpawnMarker = new("FloatingTextManager.Spawn");
         
         private FloatingTextFactory _factory;
-        private List<FloatingTextView> _activeTexts = new ();
+        private List<ActiveText> _activeTexts = new ();
 
         public void Initialize()
         {
@@ -23,17 +23,37 @@ namespace FloatingText
             var textView = _factory.Create();
             textView.SetupComponent(position, text);
 
+            var activeText = new ActiveText()
+            {
+                View = textView,
+                Lifetime = 0f,
+                MaxLifetime = 1f,
+                Position = position,
+                Style = 0
+            };
+
             // track
-            _activeTexts.Add(textView);
+            _activeTexts.Add(activeText);
 
             SpawnMarker.End();
         }
 
         private void Update()
         {
-            foreach (var text in _activeTexts)
+            for (int i = _activeTexts.Count - 1; i >= 0; i--)
             {
-                text.transform.position += Vector3.up * Time.deltaTime * 0.1f;
+                var text = _activeTexts[i];
+
+                text.Position += Vector3.up * Time.deltaTime;
+                text.Lifetime += Time.deltaTime;
+
+                text.View.transform.position = text.Position;
+
+                if (text.Lifetime >= text.MaxLifetime)
+                {
+                    _factory.Release(text.View, text.Style);
+                    _activeTexts.RemoveAt(i);
+                }
             }
         }
     }

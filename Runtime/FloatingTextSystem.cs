@@ -13,7 +13,7 @@ namespace FloatingText
         public FloatingTextSystem()
         {
             var managerGO = new GameObject("FloatingTextManager");
-            managerGO.hideFlags = HideFlags.HideAndDontSave;
+            managerGO.hideFlags = HideFlags.HideInHierarchy;
 
             _floatingTextManager = managerGO.AddComponent<FloatingTextManager>();
             _floatingTextManager.Initialize();

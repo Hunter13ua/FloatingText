@@ -21,11 +21,18 @@ namespace FloatingText
             return pool.Get();
         }
 
+        public void Release(FloatingTextView view, int style)
+        {
+            var pool = GetPoolByStyle(style);
+            pool.Release(view);
+        }
+
         private ObjectPool<FloatingTextView> GetPoolByStyle(int style)
         {
             if (!_objectPools.ContainsKey(style))
             {
                 _objectPools[style] = InstantiateNewPool();
+                
             }
 
             return _objectPools[style];
@@ -38,6 +45,7 @@ namespace FloatingText
                 createFunc: () =>
                 {
                     var view = Object.Instantiate(_floatingTextPrefab);
+                    view.hideFlags = HideFlags.HideInHierarchy;
                     return view.GetComponent<FloatingTextView>();
                 },
                 actionOnGet: view =>
